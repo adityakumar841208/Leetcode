@@ -2,26 +2,17 @@ class Solution:
     def generate(self, numRows):
         
         # will start from top down approach
-        dp = [[]] * numRows
+        triangle = []
         
-        def findSol(n, memo):
-            if n == 1:
-                return [n]
+        for i in range(numRows):
+            # create a new row
+            row = [1] * (i + 1)
             
-            if n == 2:
-                return [[1][1,1]]
-            
-            if n in memo:
-                return n
-            
-            memo[n] = [findSol(n-1,memo),findSol(n-2,memo)]
-            
-            return memo
+            for j in range(1, i):
+                row[j] = triangle[i - 1][j - 1] + triangle[i - 1][j]            
+            triangle.append(row)
         
-        findSol(numRows,dp)
-        
-        return dp
-        
+        return triangle
         # return list[list] 
     
     
